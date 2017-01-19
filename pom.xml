@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.micromount.jobs</groupId>
+    <artifactId>jobsWebapp</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>jobs</name>
+    <url>http://www.micromount.com</url>
+    <description>jobsWebapp</description>
+
+    <properties>
+        <tomcat.home>${env.CATALINA_HOME}</tomcat.home>
+        <cargo.servlet.port>${env.cargo_servlet_port}</cargo.servlet.port>
+        <cargo.debug.port>${env.cargo_debug_port}</cargo.debug.port>
+        <jobs.host>localhost:</jobs.host>
+        <jobs.protocol>http://</jobs.protocol>
+        <struts.version>2.3.1</struts.version>
+    </properties>
+
+    <dependencies>
+        <!-- http://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!--Jobs model, utils & dataaccess-->
+        <dependency>
+            <groupId>com.micromount.jobs</groupId>
+            <artifactId>jobsCommon</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- GLPagiSmart pagination -->
+        <dependency>
+            <groupId>com.micromount.jobs</groupId>
+            <artifactId>pagiSmart</artifactId>
+            <version>1.0-FINAL</version>
+        </dependency>
+
+
+        <!-- Reading Excel Files -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.12</version>
+        </dependency>
+
+
+        <!-- Get client browser info -->
+        <dependency>
+            <groupId>nl.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.2.4</version>
+        </dependency>
+
+        <!-- session size/detail info -->
+        <dependency>
+            <groupId>net.sourceforge.messadmin</groupId>
+            <artifactId>MessAdmin-Core</artifactId>
+            <version>5.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.jgeppert.struts2.jquery</groupId>
+            <artifactId>struts2-jquery-plugin</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-convention-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.struts</groupId>-->
+            <!--<artifactId>struts2-sitemesh-plugin</artifactId>-->
+            <!--<version>${struts.version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+
+
+
+
+        <!-- Junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Servlet & Jsp -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+
+        <!-- Dwr -->
+        <dependency>
+            <groupId>uk.ltd.getahead</groupId>
+            <artifactId>dwr</artifactId>
+            <version>1.1-beta-3</version>
+        </dependency>
+
+        <!-- jsp taglibs -->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>request</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+
+        <!-- URL Rewrite -->
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+
+        <!-- QR Code for PDF -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>ROOT</finalName>
+        <filters>
+            <!--<filter>src/main/resources/jdbc.properties</filter>-->
+            <filter>src/main/resources/application.properties</filter>
+            <filter>src/main/resources/struts.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.doc</include>
+                    <include>**/*.pdf</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.doc</exclude>
+                    <exclude>**/*.pdf</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1-beta-1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+-                            <directory>${basedir}/src/servers</directory>
+                            <targetPath>META-INF</targetPath>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.0.6</version>
+                <executions>
+                </executions>
+                <configuration>
+                    <container>
+                        <containerId>tomcat6x</containerId>
+                        <home>${tomcat.home}</home>
+                        <output>../../logs/tomcat.log.txt</output>
+                        <!-- maps to \%WORKROOT%\logs (workenv or homeenv) -->
+                    </container>
+                    <configuration>
+                        <type>existing</type>
+                        <home>${tomcat.home}</home>
+                        <properties>
+                            <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
+                            <cargo.jvmargs>-Xdebug -Xnoagent -Djava.compiler=NONE
+                                -Xrunjdwp:transport=dt_socket,address=${cargo.debug.port},suspend=n,server=y -Xms256m
+                                -Xmx512m -XX:MaxPermSize=128m
+                            </cargo.jvmargs>
+                        </properties>
+                    </configuration>
+                    <deployer>
+                        <deployables>
+                            <deployable>
+                                <groupId>${groupId}</groupId>
+                                <artifactId>${artifactId}</artifactId>
+                                <type>war</type>
+                                <location>${basedir}/src/main/webapp</location>
+                                <pingURL>${jobs.protocol}${jobs.host}${cargo.servlet.port}/${artifactId}</pingURL>
+                                <pingTimeout>120000</pingTimeout>
+                                <properties>
+                                    <context>jobs</context>
+                                </properties>
+                            </deployable>
+                        </deployables>
+                    </deployer>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <profiles>
+
+        <profile>
+            <id>INPLACE</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+                <file>
+                    <!--<exists>inplace.webapp</exists>-->
+                </file>
+            </activation>
+            <properties>
+                <server.wait>true</server.wait>
+                <webapp.path>${basedir}/src/main/webapp</webapp.path>
+                <webapp.directory>${basedir}/src/main/webapp</webapp.directory>
+                <app.context>/jobs</app.context>
+                <app.docBase>${basedir}/src/main/webapp</app.docBase>
+                <app.reloadable>true</app.reloadable>
+            </properties>
+            <build>
+                <filters>
+                    <!--<filter>src/main/resources/jdbc.properties</filter>-->
+                    <filter>src/main/resources/application.properties</filter>
+                    <filter>src/main/resources/struts.properties</filter>
+                </filters>
+                <!--<resources>-->
+                    <!--&lt;!&ndash;<resource>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<directory>src/main/resources</directory>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<filtering>true</filtering>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<includes>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<include>**/*.doc</include>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<include>**/*.pdf</include>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</includes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</resource>&ndash;&gt;-->
+                    <!--<resource>-->
+                        <!--<directory>src/main/resources</directory>-->
+                        <!--<filtering>true</filtering>-->
+                        <!--<excludes>-->
+                            <!--<exclude>*.doc</exclude>-->
+                            <!--<exclude>*.pdf</exclude>-->
+                        <!--</excludes>-->
+                    <!--</resource>-->
+                <!--</resources>-->
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <nonFilteredFileExtensions>
+                                <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                                <nonFilteredFileExtension>doc</nonFilteredFileExtension>
+                            </nonFilteredFileExtensions>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.1</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <echo>Displaying value of 'database.serverName' property</echo>
+                                        <echo>[database.serverName] ${database.serverName}</echo>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>IP-OLD</id>
+
+            <properties>
+                <docBase>docBase="${basedir}/src/main/webapp"</docBase>
+            </properties>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <version>1.0.6</version>
+                        <artifactId>cargo-maven2-plugin</artifactId>
+                        <configuration>
+                            <configuration>
+                                <deployables>
+                                    <deployable>
+                                        <location>${basedir}/src/main/webapp</location>
+                                        <properties>
+                                            <context>jobs</context>
+                                        </properties>
+                                    </deployable>
+                                </deployables>
+                            </configuration>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>MessAdmin</id>
+            <url>http://messadmin.sourceforge.net/maven2/</url>
+        </repository>
+    </repositories>
+
+</project>
+
+        <!-- get some squeaky toys for Lili :o) -->
+
+
